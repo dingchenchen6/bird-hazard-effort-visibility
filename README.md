@@ -51,6 +51,8 @@ Four questions:
 | Three-run reconciliation (v1/v2/v3) | HR 1.292 / 1.288 / 1.274 | `results/tables/table_province_v1_v2_v3_reconciliation.csv` |
 | Grid-native plug-in (100 km): CRU climate × merged effort | downscaled prediction surface | `results/forecasts/table_grid_100km_plugin_cmip6.csv` |
 | CMIP6 ensemble warming (4 GCMs) | SSP585 +3.3 °C (2050), +4.8 °C (2080) | `results/diagnostics/table_cmip6_ensemble_delta_summary.csv` |
+| Trait stratification: interaction by migratory strategy | **Resident HR = 1.43**, Migrant ≈ 1.25 (all significant) | `results/tables/table_migratory_stratified_interaction.csv` |
+| Predictive validation (rich XGBoost) | interpolation 0.73 · temporal forecast 0.63 · spatial 0.56 | `results/tables/table_prediction_accuracy_comparison.csv` |
 
 The province-scale interaction is robust across three risk sets, an offset test and
 a one-year-lag endogeneity test. It **attenuates with finer spatial grain** and is

@@ -46,13 +46,14 @@ fifteen-fold expansion of the risk set that recovered 60% of previously
 excluded events (province HR = 1.27, p = 1.1 × 10⁻¹⁴), and persisted when effort
 was lagged one year (HR = 1.32, p = 1.6 × 10⁻⁷), arguing against simple reverse
 causation. Beyond a well-modelled species core, the signal gave way to direct
-effort-density discovery, defining an interpretable robustness boundary. Residual
-spatial autocorrelation was negligible, though spatially honest
-cross-validation showed the model transfers weakly across regions (block AUC ≈
-0.55 vs random 0.65), so we frame it for inference rather than out-of-region
-forecasting. We argue that new distribution records are best analysed as
-effort-moderated visibility events, and that monitoring should target the
-intersection of climatic exposure and effort gaps rather than projected hazard
+effort-density discovery, defining an interpretable robustness boundary. The interaction was general across life histories but strongest in resident
+species (HR = 1.43) and weaker in migrants (≈ 1.25). Predictive validation was
+diagnostic of scope: a feature-rich model interpolated well (AUC 0.73) and
+forecast forward usably (temporal leave-future-out AUC 0.63) but transferred
+poorly across biogeographic regions (spatial-block AUC 0.56), identifying the
+record process as region-specific. We argue that new distribution records are best
+analysed as effort-moderated visibility events, and that monitoring should target
+the intersection of climatic exposure and effort gaps rather than projected hazard
 alone.
 
 **Keywords:** biodiversity monitoring; citizen science; climate velocity;
@@ -407,6 +408,24 @@ broader effort-density discovery process.
 *Source: `results/tables/table_province_v3_all_specs_coefs.csv`,
 `table_v3_three_scale_summary.csv`, `table_v2_v3_rf_comparison.csv`.*
 
+### Trait-mediated heterogeneity: residents versus migrants
+
+To relax the shared-slope assumption we refitted the interaction model separately
+by migratory strategy (Fig. 9a). The climate × effort interaction was positive and
+significant in every group, but strongest in **resident species** (HR = 1.43, 95%
+CI 1.21–1.69, p = 2.9 × 10⁻⁵, 203 events) and somewhat weaker — though still
+clearly significant — in migrants (combined HR = 1.25, p = 8.4 × 10⁻⁵; partial
+migrants 1.27, p = 9.1 × 10⁻³; long-distance migrants 1.26, p = 1.8 × 10⁻³). The
+pattern is ecologically coherent: a resident's range expansion becomes a record
+only where observation effort is sufficient, so effort moderation is strongest for
+residents; migrant and vagrant occurrences carry an additional
+movement/stochastic component that dilutes, but does not remove, the
+effort-moderated climate signal. The moderation mechanism is therefore general
+across life histories rather than an artefact of one species group, while its
+magnitude is trait-dependent.
+
+*Source: `results/tables/table_migratory_stratified_interaction.csv`.*
+
 ### Methodological robustness and diagnostics
 
 Three independent estimates of the headline interaction — the originally
@@ -418,18 +437,20 @@ distance class (Moran's I = 1.4 × 10⁻⁵ at 100 km, p = 0.98; 2.1 × 10⁻⁴
 250 km, p = 0.89; −6.6 × 10⁻⁵ at 500 km, p = 0.98), so the inference is not an
 artefact of unmodelled spatial structure.
 
-Predictive transfer is a different matter, and we report it candidly. A
-gradient-boosted (XGBoost) classifier on the relaxed risk set reached a random
-five-fold AUC of 0.777, but random folds leak spatially autocorrelated structure.
-Under spatially honest cross-validation — holding out 250 km blocks of provinces
-(blockCV, five folds) and predicting the interaction hazard model into unseen
-regions — mean AUC fell to 0.55 (± 0.05), versus 0.65 (± 0.01) for matched random
-folds on the same model. The model therefore identifies a real *in-sample*
-record-generating structure but transfers weakly across regions: random CV
-overstates skill by roughly 0.1 AUC, and out-of-region forecasting from this model
-should be treated cautiously. This reinforces our recommendation to use the
-framework for inference and prioritisation logic rather than for ranking unseen
-regions on absolute predicted hazard.
+Predictive transfer depends on *what* is being predicted, and we evaluate it
+candidly along three axes with a richer gradient-boosted model (XGBoost on 20
+climate, effort, interaction and trait features; Fig. 9b). For **within-domain
+interpolation** (random five-fold CV) the rich model reaches AUC = 0.73, a useful
+gain over the two-term baseline. For **temporal forecasting** — the axis the future
+projections actually rely on — leave-future-out validation (train ≤ 2018, predict
+≥ 2019) gives AUC = 0.63, i.e. usable forward discrimination. For **spatial
+extrapolation** to held-out 250 km province blocks, AUC is only 0.56 (≈ baseline
+0.55) and does not improve with feature richness. The contrast is itself a result:
+the record-generating process interpolates and forecasts adequately but does not
+transfer across biogeographic regions, because the climate–effort–record
+relationship is region-specific. We therefore use the framework for inference,
+temporal projection and prioritisation logic, not for ranking unobserved regions
+on absolute predicted hazard.
 
 ### Scenario-based future hazard and the priority surface it implies
 
@@ -563,11 +584,12 @@ complete defense and retain "moderator" as a statement about the record-generati
 model that is now also temporally ordered, while flagging full causal
 identification as open.
 
-**Shared interaction slope.** The models estimate a single climate-by-effort slope
-across species; trait-mediated variation in dispersal, detectability and
-thermal-niche breadth is absorbed only partly by species random intercepts. A
-trait- or phylogeny-structured slope, and stratification by migratory strategy,
-are natural extensions.
+**Interaction slope varies by trait.** The headline model estimates one
+climate-by-effort slope across species; we partly relaxed this by stratifying on
+migratory strategy (Fig. 9a), which showed the interaction is general but
+strongest in residents (HR = 1.43) and weaker in migrants (≈ 1.25). Finer
+trait- or phylogeny-structured slopes remain a natural extension, and the residual
+movement/stochastic component of vagrant occurrences is not explicitly modelled.
 
 **Species-pool dependence.** The relaxed analysis shows the relative weight of
 interaction versus direct effort depends on how the species pool is defined; the
@@ -769,6 +791,9 @@ observational biodiversity records and involved no animal handling.
 | Figure 7 | `figures/main/Figure_7_county_plugin_unified.{pdf,png}` | County (县) plug-in: CRU climate × merged effort, CMIP6 futures |
 | Figure 8 | `figures/main/Figure_8_grid100_native_plugin_hazard.{pdf,png}` | 100 km grid-native plug-in: CRU temperature anomaly × merged survey effort; current + CMIP6-ensemble futures |
 | Figure 8b | `figures/main/Figure_8b_grid50_native_plugin_hazard.{pdf,png}` | 50 km grid-native plug-in (same design, finer grain) |
+| Figure 9 | `figures/main/Figure_9_migratory_and_prediction.{pdf,png}` | (a) interaction by migratory strategy; (b) predictive AUC — interpolation / temporal forecast / spatial extrapolation |
+| Table 6 | `results/tables/table_migratory_stratified_interaction.csv` | Interaction HR by migratory group |
+| Table 7 | `results/tables/table_prediction_accuracy_comparison.csv` | Predictive AUC across CV regimes + rich-feature importance |
 | Table S3 | `results/tables/table_effort_lag_refit.csv` / `table_spatial_block_cv.csv` / `table_grid_100km_plugin_cru.csv` | Endogeneity, spatial CV, grid-native plug-in |
 | Table 1 | `results/tables/table_province_v2_coefs.csv` | Conservative four-spec interaction |
 | Table 2 | `results/tables/table_m5_offset_summary.csv` | M4-vs-M5 moderation-vs-scaling test |

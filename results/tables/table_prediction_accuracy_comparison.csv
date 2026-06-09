@@ -1,0 +1,8 @@
+model,cv_type,auc_mean,auc_sd
+Baseline cloglog (climate×effort),spatial(ref 0.55),0.554,0.053
+Rich XGBoost — random CV,random (interpolation),0.7257448856623,0.0345385188858434
+Rich XGBoost — temporal (leave-future-out),temporal (forecast),0.62804822795006,
+Rich XGBoost — spatial-block CV,spatial-block 250km,0.561300566347258,0.0485781278744052
+Baseline features — spatial-block,spatial-block 250km,0.49255319579163,0.0684242316944563
+Rich XGB Resident — spatial,spatial-block,0.509513750741194,0.102480707882253
+Rich XGB Migrant — spatial,spatial-block,0.55839739321441,0.0571320147155407
