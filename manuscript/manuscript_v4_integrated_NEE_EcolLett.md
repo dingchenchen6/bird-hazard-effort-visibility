@@ -13,12 +13,14 @@
 **Article type:** Article / Letter (IMRaD with Methods at the end; reformattable for either venue)
 
 > **Provenance note (for internal use; remove before submission).** Every quantitative
-> value in this manuscript is traced to a persisted result table under
-> `results/` of the `bird_hazard_model_effort_upgrade_v2` project. Analyses that
-> were scripted but not yet written to a result table (grid-native 50/100 km
-> refits, spatial-block cross-validation, forecast-skill PSI) are described as
-> method-ready future work and carry **no numerical claim** in the text. See the
-> companion file `中文_过程与结果_系统总结.md` for the full table-to-claim map.
+> value in this manuscript is traced to a persisted result table under `results/`.
+> The grid-native 50/100 km surfaces (CRU climate × merged effort), spatial-block
+> cross-validation, the lagged-effort endogeneity test, migratory stratification,
+> the relaxed-set parallel analysis and the CMIP6 ensemble futures are all now
+> computed and reported with numbers. The only items still described as
+> method-ready (no numerical claim) are the six-climate-metric interaction matrix
+> and per-feature forecast-skill PSI. See `中文_过程与结果_系统总结.md` for the
+> full table-to-claim map.
 
 ---
 
@@ -812,6 +814,7 @@ observational biodiversity records and involved no animal handling.
 | Table 6 | `results/tables/table_migratory_stratified_interaction.csv` | Interaction HR by migratory group |
 | Table 7 | `results/tables/table_prediction_accuracy_comparison.csv` | Predictive AUC across CV regimes + rich-feature importance |
 | Figure 10 | `figures/main/Figure_10_v3_full_analysis.{pdf,png}` | Full parallel analysis on the relaxed (v3) set: migratory interaction + predictive AUC |
+| Figure 8 (v3) | `figures/main/Figure_8_v3_grid100_plugin_hazard.{pdf,png}` / `Figure_8b_v3_grid50_plugin_hazard.{pdf,png}` | Relaxed-set grid plug-in hazard (100/50 km), parallel to Fig 8/8b |
 | Table 8 | `results/tables/table_v3_{endogeneity_lag,migratory_stratified,prediction_accuracy}.csv` | Relaxed-set parallel analysis (endogeneity, migratory, prediction) |
 | Table S3 | `results/tables/table_effort_lag_refit.csv` / `table_spatial_block_cv.csv` / `table_grid_100km_plugin_cru.csv` | Endogeneity, spatial CV, grid-native plug-in |
 | Table 1 | `results/tables/table_province_v2_coefs.csv` | Conservative four-spec interaction |
