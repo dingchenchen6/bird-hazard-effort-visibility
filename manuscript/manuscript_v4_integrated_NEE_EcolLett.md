@@ -395,6 +395,23 @@ expands toward effort-dominated discovery. The boundary is informative rather
 than a failure — it separates a climate-effort visibility mechanism from a
 broader effort-density discovery process.
 
+We re-ran the **full analysis suite on the relaxed set as an independent parallel
+analysis** (Fig. 10). The interaction again survived a one-year effort lag
+(HR = 1.292, 95% CI 1.196–1.396, p = 9.7 × 10⁻¹¹, ΔAIC[M3→M4] = 36.8), confirming
+the endogeneity defense at scale. Stratifying by migratory strategy, the
+interaction was significant in every group but — in contrast to the conservative
+set, where residents were strongest — the relaxed set gave the strongest
+interaction in **long-distance migrants** (HR = 1.33, p = 7 × 10⁻⁶), with migrants
+overall (1.29) ≥ residents (1.28); the species added by relaxation are
+disproportionately migrant/vagrant taxa whose records track effort-rich
+landscapes, exactly the effort-density regime the boundary describes. Predictive
+validation showed the same scope-dependence as the conservative set
+(interpolation AUC 0.76 > spatial-block 0.62 ≈ temporal 0.59), the larger event
+base lifting in-domain discrimination.
+
+*Source: `results/tables/table_v3_endogeneity_lag.csv`,
+`table_v3_migratory_stratified.csv`, `table_v3_prediction_accuracy.csv`.*
+
 **Table 5.** Province-scale interaction in the relaxed event-override risk set
 (188,870 rows, 463 species, 817 events).
 
@@ -794,6 +811,8 @@ observational biodiversity records and involved no animal handling.
 | Figure 9 | `figures/main/Figure_9_migratory_and_prediction.{pdf,png}` | (a) interaction by migratory strategy; (b) predictive AUC — interpolation / temporal forecast / spatial extrapolation |
 | Table 6 | `results/tables/table_migratory_stratified_interaction.csv` | Interaction HR by migratory group |
 | Table 7 | `results/tables/table_prediction_accuracy_comparison.csv` | Predictive AUC across CV regimes + rich-feature importance |
+| Figure 10 | `figures/main/Figure_10_v3_full_analysis.{pdf,png}` | Full parallel analysis on the relaxed (v3) set: migratory interaction + predictive AUC |
+| Table 8 | `results/tables/table_v3_{endogeneity_lag,migratory_stratified,prediction_accuracy}.csv` | Relaxed-set parallel analysis (endogeneity, migratory, prediction) |
 | Table S3 | `results/tables/table_effort_lag_refit.csv` / `table_spatial_block_cv.csv` / `table_grid_100km_plugin_cru.csv` | Endogeneity, spatial CV, grid-native plug-in |
 | Table 1 | `results/tables/table_province_v2_coefs.csv` | Conservative four-spec interaction |
 | Table 2 | `results/tables/table_m5_offset_summary.csv` | M4-vs-M5 moderation-vs-scaling test |

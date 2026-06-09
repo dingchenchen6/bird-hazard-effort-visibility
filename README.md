@@ -53,6 +53,9 @@ Four questions:
 | CMIP6 ensemble warming (4 GCMs) | SSP585 +3.3 °C (2050), +4.8 °C (2080) | `results/diagnostics/table_cmip6_ensemble_delta_summary.csv` |
 | Trait stratification: interaction by migratory strategy | **Resident HR = 1.43**, Migrant ≈ 1.25 (all significant) | `results/tables/table_migratory_stratified_interaction.csv` |
 | Predictive validation (rich XGBoost) | interpolation 0.73 · temporal forecast 0.63 · spatial 0.56 | `results/tables/table_prediction_accuracy_comparison.csv` |
+| **Relaxed-set parallel analysis** (188,870 rows): endogeneity | lagged-effort HR = **1.292**, p = 9.7×10⁻¹¹ | `results/tables/table_v3_endogeneity_lag.csv` |
+| Relaxed-set migratory: long-distance migrants strongest | Long-distance **1.33**, Resident 1.28 (all significant) | `results/tables/table_v3_migratory_stratified.csv` |
+| Relaxed-set prediction | interpolation 0.76 · spatial 0.62 · temporal 0.59 | `results/tables/table_v3_prediction_accuracy.csv` |
 
 The province-scale interaction is robust across three risk sets, an offset test and
 a one-year-lag endogeneity test. It **attenuates with finer spatial grain** and is

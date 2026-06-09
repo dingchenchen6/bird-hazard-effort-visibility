@@ -1,0 +1,4 @@
+model,auc_mean,auc_sd,run
+Rich XGBoost — random CV (interpolation),0.757364102669659,0.00304456137212212,v3
+Rich XGBoost — temporal (leave-future-out),0.585070969855826,,v3
+Rich XGBoost — spatial-block CV,0.615718089624736,0.0257510189733006,v3
