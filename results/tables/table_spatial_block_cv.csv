@@ -1,0 +1,3 @@
+cv_type,n_folds,auc_mean,auc_sd,auc_min,auc_max,spec,model
+spatial_block_250km,5,0.554458374909937,0.0528917825638276,0.506337124211234,0.635474085132445,B_observer_visits,M4_cloglog
+random_5fold,5,0.647587796821934,0.011399168024013,0.633599803411124,0.661776207105665,B_observer_visits,M4_cloglog

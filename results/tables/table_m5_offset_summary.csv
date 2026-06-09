@@ -1,0 +1,9 @@
+spec_id,spec_label,M4,M5,dAIC_M4_minus_M5,run,interpretation
+spec_A,Record-based (legacy),4205.87360725053,5714.92601480808,-1509.05240755756,v2,M4 wins (interaction; effort is moderator)
+spec_B,Observer visits,4196.14443787281,5529.54713116937,-1333.40269329655,v2,M4 wins (interaction; effort is moderator)
+spec_C,PCA composite,4209.15684496754,4441.8096601589,-232.652815191352,v2,M4 wins (interaction; effort is moderator)
+spec_D,Birding days,4197.45273945317,4837.01754574839,-639.56480629522,v2,M4 wins (interaction; effort is moderator)
+spec_A,Record-based (legacy),9949.28847285727,11029.8441589612,-1080.55568610392,v3,M4 wins (interaction; effort is moderator)
+spec_B,Observer visits,9894.22701671863,10574.9892497874,-680.762233068792,v3,M4 wins (interaction; effort is moderator)
+spec_C,PCA composite,10078.8650311551,10077.5603021409,1.30472901417306,v3,M5 wins (offset; effort is scaling factor)
+spec_D,Birding days,9868.57409404673,10155.2813176474,-286.707223600639,v3,M4 wins (interaction; effort is moderator)

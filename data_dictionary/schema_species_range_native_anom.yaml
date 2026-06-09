@@ -1,0 +1,29 @@
+file: species_range_native_anom.csv
+path: /Users/dingchenchen/Documents/New records/bird-new-distribution-records/tasks/bird_hazard_model_effort_upgrade_v2/data/raw/species_range_native_anom.csv
+rows_sampled: 7659
+columns: 3
+variables:
+- name: year
+  type: integer
+  n_missing: 0
+  unique: .na.integer
+  min: 2002
+  max: 2024
+  unit: year
+  description: ''
+- name: temp_native_anom_range
+  type: numeric
+  n_missing: 0
+  unique: .na.integer
+  min: 0.7864769
+  max: 1.5171402
+  unit: °C
+  description: ''
+- name: species
+  type: character
+  n_missing: 0
+  unique: 333
+  min: ~
+  max: ~
+  unit: ''
+  description: ''

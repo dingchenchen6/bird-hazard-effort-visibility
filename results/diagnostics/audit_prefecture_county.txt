@@ -1,0 +1,101 @@
+[42 11:34:47] 
+[42 11:34:47] ============================================================
+[42 11:34:47] AUDIT — 1. Load + spatial join events → prefecture / county
+[42 11:34:47] ============================================================
+[42 11:34:47] events (coord-valid, 2002-2024): 930 | species: 519
+[42 11:34:52] polygons: 35 provinces, 371 prefectures, 2901 counties
+[42 11:34:53] events with prefecture: 876 covering 221 prefectures, 32 provinces
+[42 11:34:53] events with county    : 876 covering 484 counties, 32 provinces
+[42 11:34:53] 
+[42 11:34:53] ============================================================
+[42 11:34:53] AUDIT — 2. SDM threshold filter and candidate set
+[42 11:34:53] ============================================================
+[42 11:34:53] SDM-thresholded (species, province) candidates: 7764
+[42 11:34:53] events INSIDE SDM candidate set — prefecture: 476 (lost 400 outside SDM)
+[42 11:34:53] events INSIDE SDM candidate set — county    : 476 (lost 400 outside SDM)
+[42 11:34:53] 
+[42 11:34:53] ============================================================
+[42 11:34:53] AUDIT — 3. Extract WorldClim 10' to prefecture + county polygons
+[42 11:34:53] ============================================================
+[42 11:34:57] prefecture climate: 371 rows × 11 cols (NA bio1: 0)
+[42 11:34:57] county     climate: 2901 rows × 11 cols (NA bio1: 0)
+[42 11:34:57] 
+[42 11:34:57] ============================================================
+[42 11:34:57] AUDIT — 4. Effort allocation by record-share within province × year
+[42 11:34:57] ============================================================
+[42 11:34:57] province effort panel: 719 rows, 34 provinces
+[42 11:34:57] loading combined-dedup raw records (≈ 2.3 GB)…
+[42 11:35:13] raw records: 7489848 rows | cols: species, longitude, latitude, year, month, day, username
+[42 11:35:18] raw records after 2002-2024 + coord filter: 7483083
+[42 11:35:24] st_within(raw → prefecture)…
+[42 11:37:16] raw records → prefecture: 7059288
+[42 11:37:16] st_within(raw → county)…
+[42 11:38:16] raw records → county    : 7059288
+[42 11:38:20] prefecture effort rows: 4585 | within-year SD of log_effort_visits_z: 1 (sanity: > 0 means real within-province variation, not broadcast)
+[42 11:38:20] county     effort rows: 16314 | within-year SD of log_effort_visits_z: 1
+[42 11:38:20] 
+[42 11:38:20] ============================================================
+[42 11:38:20] AUDIT — 5. Build OOM-safe case-control risk sets
+[42 11:38:20] ============================================================
+[42 11:38:20] PREFECTURE — SDM-restricted (species × unit) pairs: 93380
+[42 11:38:20] PREFECTURE — first-arrival (species × unit) pairs: 475
+[42 11:38:20] PREFECTURE — event rows (after SDM filter): 475 out of 475 first-arrival pairs (100.0% kept)
+[42 11:38:20] PREFECTURE — sampling 38000 non-event rows (1 : 80)
+[42 11:38:21] PREFECTURE — final risk set: 38393 rows (events = 475)
+[42 11:38:21] COUNTY — SDM-restricted (species × unit) pairs: 736499
+[42 11:38:21] COUNTY — first-arrival (species × unit) pairs: 475
+[42 11:38:21] COUNTY — event rows (after SDM filter): 475 out of 475 first-arrival pairs (100.0% kept)
+[42 11:38:21] COUNTY — sampling 95000 non-event rows (1 : 200)
+[42 11:38:21] COUNTY — final risk set: 95453 rows (events = 475)
+[42 11:38:21] 
+[42 11:38:21] ============================================================
+[42 11:38:21] AUDIT — 6. Risk-set sanity check before model fitting
+[42 11:38:21] ============================================================
+[42 11:38:21] prefecture risk: rows=38393 events=475 unique species=333 unique units=368 unique provinces=32
+[42 11:38:21] prefecture NA check: temp_grad_z=0 bio1_z=0 log_effort_visits_z=0
+[42 11:38:21] prefecture effort within-year SD (2020): 1 (must be > 0 — confirms within-province variation)
+[42 11:38:21] county risk: rows=95453 events=475 unique species=333 unique units=2898 unique provinces=32
+[42 11:38:21] county NA check: temp_grad_z=0 bio1_z=0 log_effort_visits_z=0
+[42 11:38:21] county effort within-year SD (2020): 1 (must be > 0 — confirms within-province variation)
+[42 11:38:21] 
+[42 11:38:21] ============================================================
+[42 11:38:21] AUDIT — 7. Fit M0-M4 cloglog hazard at prefecture + county
+[42 11:38:21] ============================================================
+[42 11:38:21] prefecture — model dt rows: 38393 | events: 475
+[42 11:38:32]   M0 OK (11.2s, AIC=4706.94, nobs=38393)
+[42 11:38:53]   M1 OK (19.0s, AIC=4704.48, nobs=38393)
+[42 11:39:11]   M2 OK (17.5s, AIC=4704.56, nobs=38393)
+[42 11:39:28]   M3 OK (16.7s, AIC=4701.98, nobs=38393)
+[42 11:39:49]   M4 OK (20.4s, AIC=4696.33, nobs=38393)
+[42 11:39:50] county — model dt rows: 95453 | events: 475
+[42 11:40:16]   M0 OK (26.2s, AIC=5186.87, nobs=95453)
+[42 11:40:45]   M1 OK (28.9s, AIC=5184.30, nobs=95453)
+[42 11:41:12]   M2 OK (26.7s, AIC=5184.93, nobs=95453)
+[42 11:41:47]   M3 OK (33.9s, AIC=5182.45, nobs=95453)
+[42 11:42:25]   M4 OK (37.6s, AIC=5180.82, nobs=95453)
+[42 11:42:25] 
+[42 11:42:25] ============================================================
+[42 11:42:25] AUDIT — 8. Three-scale forest plot
+[42 11:42:25] ============================================================
+[42 11:42:26] wrote fig_three_scale_forest_pref_county.{pdf,png}
+[42 11:42:26] 
+[42 11:42:26] ============================================================
+[42 11:42:26] AUDIT — 9. Future hazard projections
+[42 11:42:26] ============================================================
+[42 11:42:26] prefecture baseline rows: 370
+[42 11:42:26] county     baseline rows: 2900
+[42 11:42:26] prefecture glmmTMB future predictions: 2220
+[42 11:42:26] county     glmmTMB future predictions: 17400
+[42 11:42:30] prefecture XGBoost: nrounds=176 CV-AUC=0.799 features=temp_grad_z,log_effort_visits_z,bio1_z,bio4_z,bio12_z,bio15_z,elev_z
+[42 11:42:41] county XGBoost: nrounds=230 CV-AUC=0.797 features=temp_grad_z,log_effort_visits_z,bio1_z,bio4_z,bio12_z,bio15_z,elev_z
+[42 11:42:41] 
+[42 11:42:41] ============================================================
+[42 11:42:41] AUDIT — 10. Choropleth maps
+[42 11:42:41] ============================================================
+[42 11:43:03] wrote fig_future_hazard_glmmTMB_prefecture.{pdf,png}
+[42 11:43:23] wrote fig_future_hazard_xgboost_prefecture.{pdf,png}
+[42 11:44:03] wrote fig_future_hazard_glmmTMB_county.{pdf,png}
+[42 11:44:39] wrote fig_future_hazard_xgboost_county.{pdf,png}
+[42 11:44:39] === DONE ===
+[42 11:44:39] All files persisted under data/derived/, results/, figures/main/.
+[42 11:44:39] Audit log: results/diagnostics/audit_prefecture_county.txt

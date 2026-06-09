@@ -1,0 +1,37 @@
+file: grid_50km_base.csv
+path: /Users/dingchenchen/Documents/New records/bird-new-distribution-records/tasks/bird_hazard_model_effort_upgrade_v2/data/raw/grid_50km_base.csv
+rows_sampled: 3795
+columns: 4
+variables:
+- name: grid_id
+  type: integer
+  n_missing: 0
+  unique: .na.integer
+  min: 1
+  max: 3795
+  unit: ''
+  description: ''
+- name: province
+  type: character
+  n_missing: 0
+  unique: 31
+  min: ~
+  max: ~
+  unit: ''
+  description: ''
+- name: centroid_lon
+  type: numeric
+  n_missing: 0
+  unique: .na.integer
+  min: 73.8108624
+  max: 134.6076088
+  unit: ''
+  description: ''
+- name: centroid_lat
+  type: numeric
+  n_missing: 0
+  unique: .na.integer
+  min: 8.1724561
+  max: 53.3094032
+  unit: ''
+  description: ''

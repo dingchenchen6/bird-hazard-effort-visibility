@@ -1,0 +1,6 @@
+Stage,unique_species,rows_or_events,events_kept
+Raw events 2002-2024,519,930,930
+Restricted to SDM-modelled species (501),450,833,833
+v3 candidate set (threshold=50 + force-include),463,8931,833
+v3 risk set (complete case),463,188870,817
+v1 risk set (reference),333,12813,512

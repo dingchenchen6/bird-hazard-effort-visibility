@@ -1,0 +1,16 @@
+variable,importance,category
+temp_grad_z,5.86074215819905e-05,Climate
+temp_anom_z,5.41430435245014e-05,Climate
+log_effort_visits_z,5.03971847546578e-05,Effort
+log_effort_days_z,4.44587089309345e-05,Effort
+effort_pc1_z,4.04998493675317e-05,Effort
+temp_x_effort,3.06303961631018e-05,Climate × Effort
+mahalanobis_dist_z,2.89241439632963e-05,Climate
+year_c,2.62550155231203e-05,Year
+prec_anom_z,2.34373014603475e-05,Climate
+mahal_x_effort,1.96967543640052e-05,Climate × Effort
+precip_velocity_z,1.91955363722487e-05,Climate
+climate_exposure_z,1.4658972428246e-05,Climate
+log_effort_record_z,1.35883736735927e-05,Effort
+warming_rate_z,1.33964358907046e-05,Climate
+climate_velocity_z,1.06220055202764e-05,Climate

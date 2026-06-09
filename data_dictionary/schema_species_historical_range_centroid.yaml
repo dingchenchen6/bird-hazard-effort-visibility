@@ -1,0 +1,29 @@
+file: species_historical_range_centroid.csv
+path: /Users/dingchenchen/Documents/New records/bird-new-distribution-records/tasks/bird_hazard_model_effort_upgrade_v2/data/raw/species_historical_range_centroid.csv
+rows_sampled: 476
+columns: 3
+variables:
+- name: species
+  type: character
+  n_missing: 0
+  unique: 476
+  min: ~
+  max: ~
+  unit: ''
+  description: ''
+- name: centroid_lon
+  type: numeric
+  n_missing: 58
+  unique: .na.integer
+  min: 84.9991461
+  max: 127.3821939
+  unit: ''
+  description: ''
+- name: centroid_lat
+  type: numeric
+  n_missing: 58
+  unique: .na.integer
+  min: 17.7878289
+  max: 46.5438823
+  unit: ''
+  description: ''

@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+title: >-
+  bird-hazard-effort-upgrade-v2: multi-scale climate × effort hazard
+  model for new bird distribution records in China
+message: "If you use this code or these analyses, please cite the manuscript and this software repository."
+type: software
+authors:
+  - family-names: Ding
+    given-names: Chen-Chen
+    email: chenchending1992@gmail.com
+    affiliation: "Institute of Ecology, Peking University"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+repository-code: "https://github.com/dingchenchen6/bird-hazard-effort-upgrade-v2"
+url: "https://github.com/dingchenchen6/bird-hazard-effort-upgrade-v2"
+abstract: >-
+  Reproducible R pipeline for the v2 reanalysis of climate × effort
+  interactive drivers of new bird distribution records in China,
+  2002–2024. Province-level hazard models (M0–M5, cloglog) with crossed
+  species × province random effects; grid-native climate from WorldClim
+  2.1 10' and grid-native effort from the community-dynamics Combined
+  panel (eBird-GBIF + China-Birdwatch); CMIP6 ensemble projections
+  guarded by hard-fail checks; spatial-block CV and Moran's I residual
+  diagnostics; multi-scale (province / prefecture / county / 50 km grid
+  / 100 km grid) sensitivity matrix; full reproducibility self-check.
+keywords:
+  - macroecology
+  - hazard model
+  - species distribution
+  - climate velocity
+  - survey effort
+  - China
+  - cloglog
+  - glmmTMB
+  - reproducibility
+license: MIT
+date-released: 2026-05-22
+version: "2.0.0"
+preferred-citation:
+  type: article
+  title: >-
+    Climate-velocity exposure and survey effort interactively drive new
+    bird distribution records across China: a multi-scale hazard
+    framework
+  authors:
+    - family-names: Ding
+      given-names: Chen-Chen
+  year: 2026
+  status: in-preparation

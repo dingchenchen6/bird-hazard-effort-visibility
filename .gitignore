@@ -1,0 +1,47 @@
+# ---- Data (not redistributed; licensed/large) ----
+data/
+*.parquet
+*.rds
+*.RData
+*.fst
+*.gpkg
+# climate rasters / CMIP6
+*.tif
+*.tiff
+*.nc
+
+# ---- Very large derived tables / risk sets ----
+**/risk_set_*.csv
+
+# ---- Giant figure PDFs (keep PNGs + small vector PDFs only) ----
+# (curated: only small vector PDFs were added; giant map PDFs excluded by size)
+
+# ---- R / session debris ----
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+renv/library/
+renv/python/
+renv/staging/
+
+# ---- targets cache, logs ----
+targets/
+_targets/
+logs/
+*.log
+
+# ---- OS / editor ----
+.DS_Store
+*~
+.Rproj.user/
+
+# ---- Secrets (never commit) ----
+.env
+.env.*
+settings.json
+*_secret*
+*_token*
+*.pem
+*.key
+credentials.json

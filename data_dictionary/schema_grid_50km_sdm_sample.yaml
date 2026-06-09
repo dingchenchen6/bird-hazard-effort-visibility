@@ -1,0 +1,29 @@
+file: grid_50km_sdm_sample.csv
+path: /Users/dingchenchen/Documents/New records/bird-new-distribution-records/tasks/bird_hazard_model_effort_upgrade_v2/data/raw/grid_50km_sdm_sample.csv
+rows_sampled: 37950
+columns: 3
+variables:
+- name: grid_id
+  type: integer
+  n_missing: 0
+  unique: .na.integer
+  min: 1
+  max: 3795
+  unit: ''
+  description: ''
+- name: species
+  type: character
+  n_missing: 0
+  unique: 10
+  min: ~
+  max: ~
+  unit: ''
+  description: ''
+- name: sdm_prob
+  type: numeric
+  n_missing: 30
+  unique: .na.integer
+  min: 2.220446e-16
+  max: 0.967257
+  unit: ''
+  description: ''

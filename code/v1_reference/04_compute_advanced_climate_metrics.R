@@ -1,0 +1,1 @@
+/Users/dingchenchen/Documents/New records/bird-new-distribution-records/tasks/bird_hazard_model_effort_upgrade/code/04_compute_advanced_climate_metrics.R

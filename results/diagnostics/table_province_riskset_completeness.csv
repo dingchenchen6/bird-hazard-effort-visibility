@@ -1,0 +1,6 @@
+Stage,Records,Unique species,Events kept,Event loss vs window
+"1. Raw events (xlsx → events_100km_grid_assigned.csv, 2000-2025)",1026,565,1026,
+2. Filter to study window 2002-2024,930,519,930,0
+"3. SDM modelling ran (birdwatch + rescue projects, union)",,501,833,97
+4. Pass SDM threshold (potential=1 & historical_presence=0),,333,573,357
+5. Complete-case merge with effort + climate (final risk set),12813,333,512,418
