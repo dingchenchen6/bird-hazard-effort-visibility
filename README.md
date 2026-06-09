@@ -161,7 +161,10 @@ multi-GB risk sets). See `data_dictionary/` for schemas and §6 for sources.
 
 ## 7. Manuscript
 
-The integrated manuscript (target: *Nature Ecology & Evolution* / *Ecology Letters*)
+A submission-ready **Nature Ecology & Evolution** draft is in
+`manuscript/manuscript_NEE_final.{md,docx}` (≤150-word abstract, progressive
+introduction with explicit hypotheses H1–H4, Results with subheadings, deep
+Discussion, Methods-at-end, numbered citations). The fuller working manuscript (target: *Nature Ecology & Evolution* / *Ecology Letters*)
 and a bilingual process-and-results synthesis are in `manuscript/`
 (`manuscript_v4_integrated_NEE_EcolLett.{md,docx}`,
 `中文_过程与结果_系统总结.{md,docx}`), with a cover letter, methodology memo,
