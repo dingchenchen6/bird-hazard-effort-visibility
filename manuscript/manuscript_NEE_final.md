@@ -13,343 +13,409 @@ University, Beijing 100871, China. e-mail: chenchending1992@gmail.com
 
 New species records are a primary currency of climate-change biogeography, yet a
 record is created only when ecological exposure and human observation coincide.
-Whether survey effort merely scales how many records appear, or actively
-conditions whether climate-driven change becomes detectable at all, is untested.
-Using 12,813 species-by-province-by-year risk-set rows for 333 birds reported as
-new distribution records across mainland China (2002–2024), we show with
-discrete-time hazard models that climate exposure and effort combine
-multiplicatively: their interaction is positive across four effort metrics
-(hazard ratio 1.18–1.30) and decisively outperforms both an additive model and a
-raw-effort offset, identifying effort as a moderator rather than a scaling term.
-The interaction persists when effort is lagged a year, is strongest in resident
-species, and survives a fifteen-fold risk-set expansion, but dissolves beyond a
-well-modelled species core and transfers poorly across regions. We argue that new
-records are effort-moderated visibility events, reframing how range-shift evidence
-should be read and prioritised.
+Whether survey effort merely scales how many records appear, or actively conditions
+whether climate-driven change becomes detectable, is untested. Using complete
+discrete-time risk sets for 463 birds newly recorded across mainland China
+(2002–2024; 188,870 species-by-province-by-year rows, 817 first records), we show
+that climate exposure and effort combine multiplicatively. Their interaction is
+positive and invariant across three species-distribution-model thresholds
+(hazard ratio 1.274–1.290), and the interaction model outperforms both an additive
+model and a raw-effort offset at every threshold — identifying effort as a
+moderator rather than a scaling term. Partitioning explained deviance, effort
+accounts for ~79 %, the interaction 12–30 % and climate alone under 6 %: climate
+enters the record process chiefly *through* effort. The interaction is carried
+specifically by thermal anomalies, is present in every migratory strategy and
+strongest in long-distance migrants, and survives lagging effort by a year.
+Mechanistic and machine-learning projections agree until covariates leave the
+training domain and then diverge sharply, bounding credible forecasts near 2050.
+New records are best read as effort-moderated visibility events.
 
 ---
 
 ## Main
 
-The redistribution of life under climate change is now among the most consequential
+The redistribution of life under climate change is among the most consequential
 signals in ecology, and our knowledge of it is assembled overwhelmingly from
 occurrence records — the documented appearance of a species where it had not been
-seen before¹,². Such records anchor estimates of range-shift velocity, forecasts
-of biodiversity turnover, and the spatial targeting of conservation. They are also
-deeply ambiguous. A new record is not produced by ecology alone: it requires that
-a species become present or detectable, that observers visit the right place in the
-right season, and that a reporting system captures the encounter. The ecological
+seen before¹,². Such records anchor estimates of range-shift velocity, forecasts of
+biodiversity turnover and the spatial targeting of conservation. They are also
+deeply ambiguous. A new record is not produced by ecology alone: it requires that a
+species become present or detectable, that observers visit the right place in the
+right season, and that a reporting system capture the encounter. The ecological
 process we wish to study and the observation process that reveals it are entangled
 in the very data we use to study it³.
 
-This entanglement is not random noise. Occurrence data are concentrated in
-accessible, populous and repeatedly visited landscapes, and the explosive growth of
-citizen science can manufacture the appearance of biodiversity change where
-ecological change is slight³⁻⁵. The standard remedy is to treat survey effort as an
-additive covariate or as an offset that rescales expected counts. Both share a
-hidden assumption: that effort changes the *number* of records independently of
-ecological exposure. For new distribution records, that assumption is unlikely to
-hold. Climatic exposure may raise the probability that a species reaches or
-persists in a new place, but the colonisation becomes a *record* only where
-observation pressure is sufficient to register it. If so, climate and effort should
-act on records multiplicatively, and effort should behave as a *moderator* of the
-climate signal rather than as a uniform multiplier.
+This entanglement is not random noise. Occurrence data concentrate in accessible,
+populous and repeatedly visited landscapes, and the explosive growth of citizen
+science can manufacture the appearance of biodiversity change where ecological
+change is slight³⁻⁵. The standard remedy is to treat survey effort as an additive
+covariate or as an offset that rescales expected counts. Both share a hidden
+assumption: that effort changes the *number* of records independently of ecological
+exposure. For new distribution records that assumption is unlikely to hold.
+Climatic exposure may raise the probability that a species reaches or persists in a
+new place, but the colonisation becomes a *record* only where observation pressure
+suffices to register it. If so, climate and effort should act on records
+multiplicatively, and effort should behave as a *moderator* of the climate signal
+rather than as a uniform multiplier.
 
-The distinction is not semantic; it determines what a new-record map means. If
-effort is additive, correcting for it recovers the climate signal and predicted
-records track climatic exposure. If effort is a moderator, identical exposure
-yields records in well-watched landscapes and silence elsewhere, so any map of
-"where ranges are shifting" is partly a map of where people look — and any
-conservation priority built on it inherits that bias. Despite its importance, the
-moderator-versus-scaling question has not been posed as a direct, falsifiable test.
+The distinction determines what a new-record map means. If effort is additive,
+correcting for it recovers the climate signal and predicted records track climatic
+exposure. If effort is a moderator, identical exposure yields records in
+well-watched landscapes and silence elsewhere, so any map of "where ranges are
+shifting" is partly a map of where people look — and any conservation priority
+built on it inherits that bias. Despite its importance, the moderator-versus-scaling
+question has not been posed as a direct, falsifiable test.
 
-China offers a uniquely demanding arena in which to pose it. The country spans
-tropical, temperate, arid, plateau and high-mountain biomes across steep climatic
-gradients, and bird recording has grown by more than an order of magnitude since
-2002. New bird records here may reflect genuine redistribution, intensifying
-observation, or both, and the two are spatially confounded. Resolving them is a
-precondition for using new-record data to infer range shifts or to design
-monitoring.
+China offers a demanding arena in which to pose it. The country spans tropical,
+temperate, arid, plateau and high-mountain biomes across steep climatic gradients,
+and bird recording has grown by more than an order of magnitude since 2002. New
+bird records here may reflect genuine redistribution, intensifying observation, or
+both, and the two are spatially confounded. Resolving them is a precondition for
+using new-record data to infer range shifts or to design monitoring.
 
-We develop a multi-scale, discrete-time hazard framework for new bird records and
-use it to test four hypotheses. **H1**: climate exposure and survey effort combine
-interactively, not additively. **H2**: effort moderates the climate–hazard
-relationship rather than scaling record counts — a contrast we operationalise as an
-interaction model versus a raw-effort offset model, and defend against reverse
-causation by lagging effort. **H3**: the interaction is general across effort
-metrics, life histories, risk-set definitions and spatial scales, while its
-strength is trait- and scale-dependent. **H4**: because the process is partly an
-observation process, the framework is informative for inference and temporal
-projection but bounded for spatial extrapolation, with direct consequences for
-monitoring design.
+We develop a multi-scale, discrete-time hazard framework and test four hypotheses.
+**H1**: climate exposure and survey effort combine interactively, not additively.
+**H2**: effort moderates the climate–hazard relationship rather than scaling record
+counts — operationalised as an interaction model versus a raw-effort offset model,
+and defended against reverse causation by lagging effort. **H3**: the interaction is
+general across climate and effort proxies, life histories, risk-set definitions and
+spatial scales, while its strength is proxy-, trait- and scale-dependent. **H4**:
+because the process is partly an observation process, the framework is informative
+for inference and near-term projection but bounded for extrapolation, with direct
+consequences for monitoring design.
 
-### A discrete-time hazard framework for new records
+### Complete risk sets across species-distribution-model thresholds
 
-We cast each potential new record as a survival problem. A row in the risk set is a
-species-by-spatial-unit-by-year combination that was at risk of a first record
-before the event year; the response is the binary first arrival. Our conservative
-(headline) province risk set comprised 12,813 rows for 333 species and 512
-first-arrival events across 32 mainland provincial units, 2002–2024, with each
-species considered at risk only where a species distribution model judged its
-presence plausible. We fitted a nested family of complementary log-log hazard
-models with crossed random intercepts for species and spatial unit (Methods): a
-null model, effort-only, climate-only, an additive climate-plus-effort model
-(M3), a climate-by-effort interaction (M4), and a climate-plus-raw-effort-offset
-model (M5). Two contrasts carry the argument — M4 against M3 (interaction versus
-addition) and M4 against M5 (moderation versus scaling).
+We cast each potential new record as a survival problem: a row is a
+species-by-province-by-year combination at risk of a first record before the event
+year, and the response is the binary first arrival. Crucially, we analyse **complete
+risk sets** — no complete-case truncation and no case-control subsampling — and we
+rebuild them at three thresholds of the species-distribution model that defines
+which species are considered at risk where. Every observed event is force-included,
+so the threshold changes the candidate (non-event) denominator without altering the
+numerator (Table 1). The three sets contain 188,870, 174,859 and 164,050 rows for
+463 species and 817 events each; an earlier, complete-case-truncated set of 12,813
+rows and 512 events is retained only as a reference.
+
+**Table 1 | Complete risk sets across species-distribution-model thresholds.**
+
+| Threshold | Candidate pairs | Rows | Species | Provinces | Events |
+|---|---:|---:|---:|---:|---:|
+| 50 (most permissive) | 8,931 | 188,870 | 463 | 33 | 817 |
+| 100 | 8,239 | 174,859 | 463 | 33 | 817 |
+| 200 (most restrictive) | 7,739 | 164,050 | 463 | 33 | 817 |
+| *truncated reference* | *7,764* | *12,813* | *333* | *32* | *512* |
+
+We fitted a nested family of complementary log-log hazard models with crossed random
+intercepts for species and province (Methods): a null model (M0), effort-only (M1),
+climate-only (M2), additive climate-plus-effort (M3), a climate-by-effort interaction
+(M4) and a climate-plus-raw-effort-offset model (M5). Two contrasts carry the
+argument — M4 against M3 (interaction versus addition) and M4 against M5 (moderation
+versus scaling).
 
 ### Climate and effort combine multiplicatively
 
-At province scale the climate-by-effort interaction was positive and significant
-under every effort metric we tested (Fig. 1a, Table 1). The headline observer-visit
-specification gave a hazard ratio of 1.29 (95% confidence interval 1.18–1.41,
-P = 2.1 × 10⁻⁸); record-based, principal-component and birding-day metrics
-reproduced the same direction and magnitude (1.18–1.30, all P ≤ 6 × 10⁻⁵). The
-interaction model commanded essentially all of the model weight, beating the
-additive model by ΔAIC ≈ 29 (Akaike weight ≈ 1). The biological reading is direct:
-elevated effort amplified the hazard gained from climatic exposure, and exposure
-amplified the hazard gained from effort, so an additive correction understates
-record hazard exactly where exposure and observation coincide and overstates it
-where only one is present.
+**M4 is the best-supported model at every threshold** (Fig. 1a). Under the headline
+effort proxy it beats the additive model M3 by ΔAIC = 51–56 and the offset model M5
+by 79–81, while the null and climate-only models lag by 332–351 and 317–337. The
+interaction hazard ratio is essentially unaffected by the threshold: 1.274
+(95 % confidence interval 1.20–1.35, *P* = 1.1 × 10⁻¹⁴) at threshold 50, 1.289
+(1.21–1.37, *P* = 6.2 × 10⁻¹⁶) at 100 and 1.290 (1.21–1.37, *P* = 4.7 × 10⁻¹⁶) at
+200. Across all five effort proxies the interaction spans 1.12–1.43 (all
+*P* < 10⁻⁵).
+
+A second feature of the ladder is diagnostic. Effort alone (M1, ΔAIC = 62–68)
+explains far more than climate alone (M2, ΔAIC = 317–337): climate contributes
+little as a main effect and much as a modifier. This is the paper's central claim in
+its most compact form.
 
 ### Effort moderates, rather than scales, record hazard
 
 A positive interaction is necessary but not sufficient to establish moderation,
-because a multiplicative scaling of effort would also break additivity. We
-therefore pitted the interaction model directly against an offset model in which
-effort enters on the raw log-rate scale with its coefficient fixed at one — the
-formal encoding of "effort scales records." Across eight comparisons (four metrics ×
-two risk-set definitions) the interaction model won seven, by AIC margins of several
-hundred to over fifteen hundred (Fig. 1b). Effort changes the *slope* of the
-climate–hazard relationship, not merely its intercept, which is the statistical
-signature of a moderator. New records emerge where exposure and observation jointly
-cross a visibility threshold, not where either acts alone.
+because multiplicative scaling of effort would also break additivity. We therefore
+pitted the interaction model against an offset model in which effort enters on the
+raw log-rate scale with its coefficient fixed at one — the formal encoding of
+"effort scales records". On complete risk sets the interaction model wins at **all
+three thresholds** (Fig. 1a), a cleaner result than on the truncated set, where the
+offset model occasionally tied. Effort changes the *slope* of the climate–hazard
+relationship, not merely its intercept, which is the statistical signature of a
+moderator.
 
 The most serious alternative is reverse causation: observers may flock to places
-with recent notable records, so a concurrent interaction could reflect effort
-chasing discoveries rather than enabling them. Because effort is measured at the
-province-year level, we replaced each row's current-year effort with the same
-province's effort from the previous year and refitted. Effort that predates the
-event year cannot respond to it, yet the lagged interaction was, if anything,
-stronger (HR = 1.32, 95% CI 1.19–1.47, P = 1.6 × 10⁻⁷; ΔAIC = 26), ordering the two
-in the direction moderation predicts and ruling out the simplest reverse-causation
-account.
+with recent notable records. Because effort is measured at the province-year level,
+we replaced each row's current-year effort with the same province's effort from the
+previous year and refitted. Effort that predates the event year cannot respond to
+it, yet the lagged interaction was, if anything, stronger (hazard ratio 1.29,
+*P* = 9.7 × 10⁻¹¹), ordering the two variables in the direction moderation predicts.
+
+### The interaction runs through a thermal channel
+
+To test whether the result is an artefact of one metric choice we fitted the
+interaction for every combination of nine climate and five effort proxies
+(Fig. 1b). The interaction is **proxy-specific rather than a generic climate
+effect**. Temperature anomaly and its gradient interact strongly with every effort
+proxy (1.12–1.43, all *P* < 0.001) and precipitation anomaly moderately
+(1.05–1.23); Mahalanobis climate displacement is weak (1.01–1.13); and
+climate-velocity, climate-exposure and warming-rate proxies show no interaction at
+all (0.88–1.06). Moderation therefore operates through year-to-year thermal
+exposure, not through composite indices of climate change. We verified and report
+that two proxy pairs in the source panel are perfectly collinear after
+standardisation (temperature gradient with temperature anomaly; precipitation
+gradient with precipitation anomaly, both *r* = 1.00) and that climate exposure and
+warming rate are near-redundant (*r* = 0.89), so the nine proxies span seven
+independent axes.
 
 ### A general mechanism with trait-dependent strength
 
 Stratifying by migratory strategy relaxed the assumption of a single slope across
-species (Fig. 2a). The interaction was positive and significant in every group but
-strongest in resident species (HR = 1.43, 95% CI 1.21–1.69, P = 2.9 × 10⁻⁵) and
-weaker, though still clear, in migrants (≈ 1.25). The pattern is ecologically
-coherent: a resident's range expansion becomes a record only where observation
-effort is sufficient, so effort moderation bites hardest for residents, whereas the
-movement and stochasticity of migrant and vagrant occurrences dilute, without
-erasing, the effort-moderated climate signal. The mechanism is therefore general
-across life histories, while its magnitude is a trait.
+species (Fig. 2a). The interaction is positive and significant in **every group at
+every threshold**, and the ordering is stable: long-distance migrants strongest
+(1.325–1.354), then migrants overall (1.291–1.314), residents (1.278–1.310) and
+partial migrants (1.220–1.254). Effort moderation is thus a general property of the
+record-generating process rather than a feature of one life history. Notably, the
+truncated set had implied the opposite ordering, with residents strongest — an
+artefact of the species filtering that removed many migrant and vagrant taxa, and a
+concrete illustration of why complete risk sets matter.
 
-### A robustness boundary, and the regime beyond it
+### Partitioning the roles of effort, climate and their interaction
 
-The conservative risk set, by design, excludes many observed events. To probe its
-limits we built a deliberately inclusive, event-override risk set (188,870 rows, 463
-species, 817 events; a fifteen-fold expansion recovering 60% of previously excluded
-events). The province interaction not only survived but tightened (HR = 1.27,
-95% CI 1.20–1.35, P = 1.1 × 10⁻¹⁴), and a full parallel analysis on this set
-reproduced every headline result — the lagged-effort defence (HR = 1.29,
-P = 9.7 × 10⁻¹¹) and the migratory generality among them. Yet beyond the
-well-modelled core the signal changed character: the interaction collapsed at finer
-administrative scales (prefecture 1.04, county 1.02; both non-significant), random
-forests demoted the temperature-by-effort term from first to sixth, and — reversing
-the conservative pattern — the strongest interaction shifted to long-distance
-migrants (HR = 1.33), the very taxa whose records track effort-rich landscapes.
-This is not a failure of robustness but a *boundary*: a climate-by-effort visibility
-mechanism in the modelled core gives way to an effort-density discovery process in
-the long tail of borderline and vagrant species.
+Decomposing the deviance explained by M4 relative to the null model gives a
+remarkably stable partition across thresholds (Fig. 2b): **unique effort ~79 %, the
+climate-by-effort interaction 16 %, unique climate ~4 % and shared components ~1 %**.
+Across effort proxies the interaction share ranges 12–30 % and unique climate never
+exceeds 6 %. Variance components of M4 are marginal *R*² = 0.121–0.124 and
+conditional *R*² = 0.596–0.609: fixed effects explain about a eighth of the
+variance and the full model, including species and province random effects, about
+three fifths.
+
+The quantitative message is that survey effort is the dominant single driver of
+whether and when a record appears, climate contributes almost nothing on its own,
+and a substantial 12–30 % arises only once climate is allowed to interact with
+effort.
+
+Tree-ensemble variable importance tells a superficially contradictory story
+(Fig. 2c): random-forest permutation importance ranks climate proxies at 88 % and
+effort at −6 %, and gradient boosting at 55 % versus 21 %. The two approaches answer
+different questions. The hazard model conditions on species and province random
+effects, so its fixed effects describe within-province temporal variation, where
+growing effort is highly informative. The tree models have no such structure and
+instead use spatially structured climate proxies to encode *where* a row is; effort,
+which rises almost everywhere, then carries little discriminative signal. That
+effort's contribution emerges only once species and place are conditioned on is
+itself consistent with effort acting as a **conditional moderator** rather than a
+free-standing predictor.
 
 ### Scale dependence and ecological-grain prediction
 
-Propagating the conservative risk-set logic to finer administrative units preserved
-the interaction in sign while attenuating it with grain (province 1.29 → prefecture
-1.16 → county 1.11; Fig. 2b), the expected behaviour of a signal carried partly by
-broad gradients in exposure and survey infrastructure. Residual spatial
-autocorrelation was negligible at all tested distances, so the inference is not an
-artefact of unmodelled structure. Because new records are documented at province
-resolution, we fitted the model there and projected it onto the ecological grain:
-applying the fitted relationship to grid-native climate (CRU monthly temperature,
-2002–2024) and grid-native effort from the merged eBird/GBIF and China
-Bird-Watching panel yields a continuous national risk surface (Fig. 3) in which the
-effort-conditioned climate slope turns positive only where observation is
-sufficient, rendering the moderation mechanism as geography.
+Propagating the risk-set logic to finer administrative units preserved the
+interaction in sign while attenuating it with grain (province → prefecture →
+county), the expected behaviour of a signal carried partly by broad gradients in
+exposure and survey infrastructure; residual spatial autocorrelation was negligible
+at all tested distances. Because new records are documented at province resolution,
+we fitted the model there and projected it onto the ecological grain: applying the
+fitted relationship to grid-native climate (CRU monthly temperature, 2002–2024) and
+grid-native effort from the merged eBird/GBIF and China Bird-Watching panel yields a
+continuous national risk surface (Fig. 3) in which the effort-conditioned climate
+slope turns positive only where observation is sufficient, rendering the moderation
+mechanism as geography.
 
-### Predictive scope is itself a result
+### Two model classes bound the credible forecast horizon
 
-How far the framework predicts depends on what is being predicted (Fig. 2c). A
-feature-rich gradient-boosted model interpolated well within the observed domain
-(AUC 0.73) and forecast forward usably (temporal leave-future-out AUC 0.63, the
-axis on which future projections rest), but transferred poorly to held-out
-biogeographic regions (spatial-block AUC 0.56) and did not improve there with
-feature richness. The record-generating process is region-specific: it can be
-inferred and projected in time but should not be extrapolated to unobserved regions
-on absolute predicted hazard. Carried forward under a four-model CMIP6 ensemble
-(median warming +3.3 °C by 2050 and +4.8 °C by 2080 under SSP5-8.5) with
-development-linked effort growth, projected record risk rises through the century
-and concentrates where exposure and observation jointly intensify, most steeply in
-eastern and central China (Fig. 3).
+We projected forward with both a mechanistic hazard model and a gradient-boosted
+machine-learning model, trained on the same complete risk sets, under a four-model
+CMIP6 ensemble (median warming +3.3 °C by 2050 and +4.8 °C by 2080 under SSP5-8.5)
+with development-linked effort growth (Fig. 4a). The two classes agree early and
+diverge sharply later: relative to 2024 the mechanistic model rises 2.9-fold by
+2050 and 13-fold by 2080 under SSP2-4.5 (10.4- and 131-fold under SSP5-8.5), whereas
+the machine-learning model saturates near 2.4-fold in every scenario.
+
+The divergence is explained precisely (Fig. 4b). The share of provinces whose
+projected climate leaves the training range grows from 0 % in 2030 to 18 % by 2050
+and 55 % by 2080 under SSP2-4.5, and reaches 48 % and 91 % under SSP5-8.5, with
+effort leaving its training range in 100 % of provinces by 2080. The mechanistic
+model extrapolates linearly on the complementary log-log scale and keeps rising — a
+131-fold increase is almost certainly an over-extrapolation — while the tree
+ensemble cannot extrapolate past its training splits and therefore flattens.
+Neither behaviour is correct in isolation; together they **bound the credible
+forecast horizon**, which on this evidence reaches roughly 2050 under SSP2-4.5,
+where fewer than a fifth of units have left the observed domain, and degrades
+sharply thereafter. Rank agreement between the classes is moderate
+(Spearman ρ ≈ 0.3–0.6).
 
 ## Discussion
 
-Our central result is that survey effort does not simply add records or scale them
-up; it conditions whether climate-driven change is recorded at all. The
-climate-by-effort interaction is positive and decisively favoured over the additive
-model under every effort metric, survives the offset test that distinguishes
-moderation from scaling, and holds when effort is measured before the event. New
-distribution records are therefore best understood as effort-moderated visibility
-events: ecological information filtered through an observation process that varies
-by orders of magnitude across space and time. High exposure without sufficient
-effort stays invisible; high effort in exposed places converts redistribution into
-evidence. Treating effort as a nuisance to be subtracted, the field's default,
-mis-specifies the record-generating process in the direction that biases
-range-shift inference toward well-surveyed landscapes.
+Survey effort does not simply add records or scale them up; it conditions whether
+climate-driven change is recorded at all. On complete risk sets the
+climate-by-effort interaction is positive, threshold-invariant and decisively
+favoured over both the additive and the offset formulation, and it survives
+measuring effort a year before the event. New distribution records are therefore
+best understood as effort-moderated visibility events: ecological information
+filtered through an observation process that varies by orders of magnitude across
+space and time. High exposure without sufficient effort stays invisible; high effort
+in exposed places converts redistribution into evidence. Treating effort as a
+nuisance to be subtracted — the field's default — mis-specifies the
+record-generating process in the direction that biases range-shift inference toward
+well-surveyed landscapes.
 
-The interaction-versus-offset comparison is, we suggest, a reusable instrument.
-Much of biodiversity informatics corrects for effort with a covariate or offset and
-then proceeds as though the climate signal has been cleansed. Our result shows that
-this step is a testable hypothesis rather than a settled procedure: where the offset
-model loses decisively to the interaction model, effort is doing more than scaling,
-and the "corrected" signal remains conditional on observation intensity. The test
-is inexpensive and, we argue, should accompany any effort-aware analysis of
-occurrence data.
+The deviance partition sharpens this into a quantitative claim: effort alone
+accounts for about four fifths of what the model explains, climate alone for under a
+twentieth, and the interaction for one sixth to nearly one third depending on the
+effort proxy. Read carelessly, the dominance of effort might suggest that new
+records carry little ecological signal. Read correctly, it says that the ecological
+signal is *conditional*: climate becomes visible in the data only in combination
+with observation, which is precisely why the interaction — not the climate main
+effect — is where the biology appears. The contrast with tree-ensemble importance
+reinforces the point, because effort's contribution materialises only once species
+identity and place are conditioned on.
 
-The trait dependence sharpens the mechanism. That effort moderation is strongest in
-residents fits a visibility logic: a resident expanding its range generates a record
-only where someone is watching, so its detectability is tightly coupled to local
-effort. Migrants and vagrants add a movement component that is partly decoupled from
-local conditions, weakening the coupling in the conservative core; but when the
-species pool is widened to include the borderline and vagrant taxa that dominate the
-relaxed set, those same effort-tracked occurrences make the migrant interaction the
-strongest of all. The contrast between the two risk sets is thus not a contradiction
-but a window onto two coexisting regimes — climate-effort visibility for a modelled
-core, effort-density discovery for the long tail — that any synthesis pooling all
-species will blur. Reporting the core and the tail separately is the more honest and
-more informative practice.
+That the interaction runs specifically through thermal anomalies, and not through
+climate velocity, exposure or warming rate, is informative in two ways. Empirically
+it identifies the channel: interannual thermal departures, not long-run
+climate-change indices, are what interact with observation to generate records.
+Methodologically it warns that "climate" is not interchangeable across proxies in
+detection-aware models — a study choosing velocity or exposure as its single
+climate axis would have concluded, wrongly, that no interaction exists. The
+collinearity we document within the proxy set makes the same point from the other
+side: apparent replication across metric names can be a single axis in disguise.
 
-Scale carries its own lesson. The interaction attenuates from province to county
-without reversing, the textbook fingerprint of a signal carried by broad gradients,
-and our grid-native projection shows that the same moderation, resolved at the
-ecological grain, produces a coherent national surface rather than an artefact of
-administrative aggregation. The deliberate decision to fit where events are observed
-(the province) and to project, rather than re-estimate, at finer grain is what keeps
-that surface honest. Equally honest is the predictive boundary: the process
-interpolates and forecasts in time but does not transfer across regions, because
-what predicts records in one biogeographic setting need not predict them in another.
-This is a property of the phenomenon, not a deficiency of the model, and it has a
-clear practical corollary.
+The interaction-versus-offset comparison is a reusable instrument. Much of
+biodiversity informatics corrects for effort with a covariate or offset and then
+proceeds as though the climate signal has been cleansed. Our result shows this step
+is a testable hypothesis rather than settled procedure: where the offset model loses
+decisively, effort is doing more than scaling, and the "corrected" signal remains
+conditional on observation intensity. The test is inexpensive and should accompany
+any effort-aware analysis of occurrence data.
+
+Life-history structure adds nuance without undermining generality. Effort moderation
+appears in residents, partial migrants and long-distance migrants alike, and is
+strongest in long-distance migrants, whose occurrences accumulate where observation
+is dense. That the truncated risk set reversed this ordering is a caution about
+species filtering: conclusions about *which* taxa show a detection-mediated climate
+signal are far more sensitive to risk-set construction than the existence of the
+signal itself.
+
+The two model classes together define where forecasting stops being defensible.
+Mechanistic extrapolation and machine-learning saturation are not competing
+estimates of the same quantity; they are the two failure modes that bracket the
+truth once covariates leave the observed domain. Reporting both, alongside the
+fraction of units outside the training range, converts an unfalsifiable
+century-scale projection into a bounded near-term one. On this evidence, projections
+to mid-century under moderate emissions are supportable; projections to 2080,
+especially under high emissions and rapid monitoring growth, are not.
 
 For monitoring under climate change, raw projected hazard is a poor guide to where
-survey investment is most valuable. Our projections concentrate future risk in
-eastern and central China — places where the model expects climatic exposure to
-become highly *visible* under existing and growing effort, not necessarily where
-range change is most novel. Allocating effort there maximises the rate of new
-records but adds little to what is already well observed. The decision-relevant
-target is the opposite: units where high projected exposure meets a current effort
-gap, where modest additional survey converts latent redistribution into evidence and
-most reduces uncertainty. We therefore recommend prioritising on the product of
-climatic exposure and effort deficit, and reporting forecast uncertainty alongside
-point hazard, rather than ranking regions on projected hazard alone.
+survey investment is most valuable. Projections concentrate future risk where
+climatic exposure will become highly *visible* under existing and growing effort,
+not necessarily where range change is most novel. Allocating effort there maximises
+the rate of new records but adds little to what is already well observed. The
+decision-relevant target is the opposite: units where high projected exposure meets
+a current effort gap, where modest additional survey converts latent redistribution
+into evidence and most reduces uncertainty. We therefore recommend prioritising on
+the product of climatic exposure and effort deficit, and reporting forecast
+uncertainty alongside point hazard.
 
-Several boundaries frame these conclusions. The interaction slope, though shown to
-vary by migratory strategy, remains coarsely structured; trait- and
-phylogeny-resolved slopes are a natural next step. Effort, despite the lagged-effort
-defence, is not fully exogenous, and slow-moving confounders that make a region both
-well-watched and climatically dynamic cannot be excluded without an instrument or a
-quasi-experiment in effort allocation. New records mix genuine colonisers with
-vagrants and taxonomic revisions, a heterogeneity the relaxed analysis exposes but
-does not fully model. Future surfaces inherit uncertainty from both climate
-projections and assumed effort trajectories, and the ecological-grain map is a
-province-fitted projection, not an independently estimated grid model. None of these
-overturns the core finding; each marks where the framework can be strengthened.
+Boundaries remain. The interaction slope, though shown to vary by migratory
+strategy, is coarsely structured; trait- and phylogeny-resolved slopes are a natural
+next step. Effort, despite the lagged-effort defence, is not fully exogenous, and
+slow-moving confounders that make a region both well-watched and climatically
+dynamic cannot be excluded without an instrument or a quasi-experiment in effort
+allocation. New records mix genuine colonisers with vagrants and taxonomic
+revisions, a heterogeneity the threshold and migratory analyses expose but do not
+fully model. Future surfaces inherit uncertainty from both climate projections and
+assumed effort trajectories, and the ecological-grain map is a province-fitted
+projection, not an independently estimated grid model.
 
 New species records will continue to accumulate, faster than ever, as observation
-expands. Read as effort-moderated visibility events rather than as direct
-ecological signals, they become both more interpretable and more useful: a basis for
-separating biodiversity redistribution from observation bias, and for designing
-monitoring that learns most where it is currently blindest.
+expands. Read as effort-moderated visibility events rather than as direct ecological
+signals, they become both more interpretable and more useful: a basis for separating
+biodiversity redistribution from observation bias, and for designing monitoring that
+learns most where it is currently blindest.
 
 ## Methods
 
 ### Study system and response variable
 
-The study covered 32 mainland provincial units of China (excluding Hong Kong, Macau
-and Taiwan), 2002–2024. The response was the first recorded arrival of a species in
-a spatial unit and year, encoded as a binary event in a discrete-time risk set; once
-a species records its first arrival in a unit, that unit leaves the species' risk set
-in later years.
+The study covered 33 provincial units of mainland China, 2002–2024. The response was
+the first recorded arrival of a species in a province and year, encoded as a binary
+event in a discrete-time risk set; once a species records its first arrival in a
+unit, that unit leaves the species' risk set in later years.
 
-### Conservative and relaxed risk sets
+### Complete risk sets and threshold sensitivity
 
-The conservative (headline) risk set retained, for each species, provinces where a
-species distribution model indicated plausible presence and no prior record, with
-complete climate and effort information: 12,813 rows, 333 species, 512 events. To
-stress-test the SDM filter we built a relaxed event-override set that adopted the
-loosest binarisation threshold, force-included every species-province pair with an
-observed event, and restricted the pool to SDM-modelled species: 188,870 rows, 463
-species, 817 events.
+Risk sets were rebuilt from source at three species-distribution-model binarisation
+thresholds (50, 100, 200). At each threshold the candidate set comprised
+species-province pairs with modelled potential presence and no prior record, plus
+forced inclusion of every pair with an observed 2002–2024 event (an observed record
+being empirical evidence that overrides the model prior), restricted to the union of
+species modelled by the two source distribution-model projects. Candidates were
+expanded over years and censored after first arrival. No complete-case truncation or
+case-control subsampling was applied at any stage; the only exclusions were rows
+lacking the headline climate or effort covariate.
 
-### Climate and effort covariates
+### Climate and effort proxies
 
-Climate covariates comprised temperature and precipitation anomalies and gradients,
-climate velocity, warming rate and Mahalanobis climate displacement (WorldClim 2.1,
-CHELSA v2.1)⁶,⁷. Grid-native time-varying temperature anomaly was computed per cell
-from CRU TS 4.09 monthly data (2002–2024)⁸. Survey effort was represented by four
-metrics — record counts, observer visits (headline), a principal-component composite
-and birding-days — standardised within year; for the offset model, effort entered on
-the raw log(person-hours + 1) scale. Grid and fine-scale effort came from the merged
-eBird/GBIF + China Bird-Watching "Combined" panel⁵.
+Nine climate proxies were evaluated: temperature and precipitation anomalies and
+gradients, climate velocity, precipitation velocity, climate exposure, warming rate
+and Mahalanobis climate displacement (derived from WorldClim 2.1 and CHELSA
+v2.1)⁶,⁷. Pairwise collinearity was audited and is reported. Grid-native
+time-varying temperature anomaly was computed per cell from CRU TS 4.09 monthly data
+(2002–2024)⁸. Five effort proxies were evaluated: record counts, observer visits
+(headline), observers, birding-days and a principal-component composite,
+standardised within year; for the offset model effort entered on the raw log-rate
+scale. Grid and fine-scale effort came from the merged eBird/GBIF and China
+Bird-Watching panel⁵.
 
-### Hazard models
+### Hazard models and decomposition
 
-We fitted discrete-time complementary log-log hazard models in glmmTMB⁹ with crossed
-random intercepts for species and spatial unit: M0 (null), M1 (effort), M2 (climate),
-M3 (climate + effort), M4 (climate × effort) and M5 (climate + raw-effort offset). We
-report hazard ratios with 95% confidence intervals, P values, AIC differences and
-Akaike weights. Endogeneity was probed by refitting M4 with effort lagged one year at
-the province-year level; trait dependence by refitting separately by migratory
-strategy. The model was fitted at province scale (where events are recorded) and
-applied as a plug-in to finer administrative units and to 50/100 km ecological grids
-with unit-native covariates.
+Discrete-time complementary log-log hazard models were fitted in glmmTMB⁹ with
+crossed random intercepts for species and province: M0 (null), M1 (effort),
+M2 (climate), M3 (climate + effort), M4 (climate × effort) and M5 (climate +
+raw-effort offset). We report hazard ratios with 95 % confidence intervals,
+*P* values and AIC differences. Endogeneity was probed by refitting M4 with effort
+lagged one year at the province-year level; trait dependence by refitting separately
+by migratory strategy. Explained deviance was partitioned from the ladder
+log-likelihoods into unique effort (M2 → M3), unique climate (M1 → M3), shared and
+interaction increment (M3 → M4) components, with McFadden *R*² relative to M0;
+marginal and conditional *R*² followed a Nakagawa-style decomposition of fixed,
+random and distribution-specific variance. Relative importance used random-forest
+permutation importance (probability forest with class weights) and gradient-boosting
+gain on the same complete risk sets.
 
-### Diagnostics, prediction and projection
+### Prediction and projection
 
-Residual spatial autocorrelation was assessed by Moran's I at 100/250/500 km. Predictive
-performance was evaluated with a feature-rich gradient-boosted model (XGBoost) under
-three cross-validation regimes — random (interpolation), temporal leave-future-out
-(forecast) and 250 km spatial-block (extrapolation; blockCV)¹⁰ — with AUC by the
-Mann–Whitney statistic. Future climate used a four-GCM CMIP6 ensemble (ACCESS-CM2,
-MPI-ESM1-2-HR, MIROC6, UKESM1-0-LL) under SSP2-4.5 and SSP5-8.5⁴; effort futures used
-development-linked growth scenarios. Modifiable-areal-unit elasticity, the
-six-climate-metric interaction matrix and per-feature covariate-shift indices are
-method-ready extensions not reported numerically here. Maps use the official
+Predictive performance was evaluated under three cross-validation regimes — random
+(interpolation), temporal leave-future-out (forecast) and 250 km spatial-block
+(extrapolation)¹⁰ — with area under the curve computed from the Mann–Whitney
+statistic. Future climate used a four-GCM CMIP6 ensemble (ACCESS-CM2,
+MPI-ESM1-2-HR, MIROC6, UKESM1-0-LL) under SSP2-4.5 and SSP5-8.5 for 2030, 2050 and
+2080¹²; effort futures used development-linked growth scenarios (+0.3 and +0.6
+standard deviations per decade). Projections were made with both the mechanistic
+hazard model and a gradient-boosted model, and we report, for every scenario, the
+share of units whose covariates leave the training range. Maps use the official
 GS(2019)1822 basemap and render the national boundary and the South China Sea
 nine-dash line.
 
 ### Reproducibility
 
-Analyses used R (glmmTMB, xgboost, blockCV, terra, sf, targets, arrow) with versions
-pinned in a lockfile and a targets pipeline; every reported value is traceable to a
-named result table. Code and derived outputs are at
-https://github.com/dingchenchen6/bird-hazard-effort-visibility.
+Analyses used R (glmmTMB, xgboost, ranger, blockCV, terra, sf, arrow) with versions
+pinned in a lockfile; every reported value is traceable to a named result table.
+Code and derived outputs are at
+<https://github.com/dingchenchen6/bird-hazard-complete-riskset> (complete-risk-set
+analysis suite) and <https://github.com/dingchenchen6/bird-hazard-effort-visibility>
+(manuscript and main analysis).
 
 ## Data availability
 
 Derived covariate tables, model outputs and data dictionaries are in the project
-repository; non-sensitive products will be deposited at Zenodo on acceptance, with
+repositories; non-sensitive products will be deposited at Zenodo on acceptance, with
 licensed occurrence data shared under source-specific terms. Climate products are
-public (WorldClim, CHELSA, CRU TS, CMIP6 via WorldClim/ESGF); the GS(2019)1822
-basemap is from the Ministry of Natural Resources of China.
+public (WorldClim, CHELSA, CRU TS, CMIP6); the GS(2019)1822 basemap is from the
+Ministry of Natural Resources of China.
 
 ## Code availability
 
-Version-controlled R/Python code, the renv lockfile and the targets pipeline are at
-the repository above and will be archived at Zenodo on acceptance.
+Version-controlled R code, the renv lockfile and the analysis pipeline are at the
+repositories above and will be archived at Zenodo on acceptance.
 
 ## References
 
@@ -367,24 +433,66 @@ the repository above and will be archived at Zenodo on acceptance.
 12. Eyring, V. et al. *Geosci. Model Dev.* **9**, 1937–1958 (2016).
 13. Openshaw, S. *The Modifiable Areal Unit Problem* (Geo Books, 1984).
 
-*(Full reference details with DOIs in `pipeline_finalization_and_citation_audit.md`;
-NEE uses superscript numbered citations — renumber on final typesetting. CMIP6,
-climate-velocity and MAUP references appear in Methods.)*
+## Figures
 
-## Display items
+**Fig. 1 | The interaction is threshold-invariant and runs through a thermal
+channel.**
+**a**, Model ladder M0–M5 on the three complete risk sets under the headline effort
+proxy; bars show ΔAIC relative to the best model. M4 (climate × effort) is best at
+every threshold, beating the additive model M3 by 51–56 and the effort-as-offset
+model M5 by 79–81; effort-only (M1, 62–68) far outperforms climate-only (M2,
+317–337). **b**, Interaction hazard ratio for all nine climate × five effort proxy
+combinations at threshold 50, with threshold robustness for the three leading
+climate proxies. Thermal anomaly/gradient (1.12–1.43) and precipitation anomaly
+(1.05–1.23) interact with effort; climate-velocity, exposure and warming-rate
+proxies do not (0.88–1.06). Collinear proxy pairs are annotated.
+*Source: `Fig_A_model_ladder`, `Fig_B_proxy_matrix`.*
 
-- **Fig. 1** Province headline: (a) climate × effort interaction across four effort
-  metrics; (b) interaction (M4) vs offset (M5) — moderation, not scaling.
-  [`Figure_2_v4_province_headline_M5_raincloud`]
-- **Fig. 2** (a) interaction by migratory strategy; (b) attenuation across
-  administrative scales; (c) predictive AUC across interpolation/forecast/extrapolation.
-  [`Figure_9_migratory_and_prediction`, `Figure_3_v4_three_scale_forest_M5`]
-- **Fig. 3** Ecological-grain risk surface: grid-native CRU climate × merged effort,
-  current and CMIP6 + effort-scenario futures, cool→warm, with nine-dash line.
-  [`Figure_8_grid100_native_plugin_hazard`]
-- **Table 1** Province interaction estimates (four effort specifications).
-- **Extended Data** robustness boundary (relaxed set), v1/v2/v3 reconciliation,
-  Moran's I, CMIP6 ensemble deltas, feature importance, 50 km grid, v3 grid surface.
+**Fig. 2 | Generality across life histories, and the roles of effort, climate and
+their interaction.**
+**a**, Interaction hazard ratio by migratory strategy at all three thresholds; every
+group is positive and significant, with long-distance migrants strongest
+(1.325–1.354). **b**, Partition of the deviance explained by M4: unique effort
+~79 %, interaction 16 %, unique climate ~4 %, shared ~1 %, stable across thresholds.
+**c**, Random-forest permutation and gradient-boosting importance on the same data,
+which rank climate above effort — the opposite of **b** — because tree ensembles
+lack the species and province random effects that condition the hazard model.
+*Source: `Fig_C_migratory`, `Fig_D_variance_decomposition`,
+`Fig_E_relative_importance`.*
+
+**Fig. 3 | Ecological-grain risk surface.** Province-fitted hazard relationship
+applied to grid-native CRU temperature anomaly and merged survey effort at 100 km
+(and 50 km), for the present and under CMIP6 warming with SSP-differentiated effort
+growth; cool-to-warm palette, official basemap with the nine-dash line. Projected
+risk rises where exposure and observation intensify jointly.
+*Source: `Figure_8_grid100_native_plugin_hazard`,
+`Figure_8b_grid50_native_plugin_hazard`.*
+
+**Fig. 4 | Two model classes bound the credible forecast horizon.**
+**a**, Mean province hazard projected by the mechanistic hazard model and by
+gradient boosting, for both emissions pathways and all three thresholds (log scale).
+The mechanistic model rises to 13-fold (SSP2-4.5) and 131-fold (SSP5-8.5) by 2080;
+the machine-learning model saturates near 2.4-fold. **b**, Percentage of provinces
+whose projected climate leaves the training range — 18 % by 2050 and 55 % by 2080
+under SSP2-4.5, 48 % and 91 % under SSP5-8.5 — explaining where and why the two
+classes diverge.
+*Source: `Fig_F_future_mech_vs_ml`.*
+
+### Extended Data
+
+| Item | Content |
+|---|---|
+| ED Table 1 | Risk-set construction summary across thresholds (`table_riskset_construction_summary.csv`) |
+| ED Table 2 | Full model ladder, all thresholds × effort proxies (`table_A_model_ladder.csv`) |
+| ED Table 3 | Climate × effort proxy matrix (`table_B_proxy_matrix.csv`) |
+| ED Table 4 | Migratory stratification (`table_C_migratory.csv`) |
+| ED Table 5 | Deviance decomposition and marginal/conditional *R*² (`table_D_*.csv`) |
+| ED Table 6 | Relative importance, random forest and gradient boosting (`table_E_relative_importance.csv`) |
+| ED Table 7 | Future projections and mechanistic–ML concordance (`table_F_*.csv`) |
+| ED Table 8 | Climate-proxy collinearity audit (`table_G_climate_proxy_collinearity.csv`) |
+| ED Fig. 1 | Endogeneity: lagged-effort interaction |
+| ED Fig. 2 | Predictive validation across interpolation, temporal and spatial regimes |
+| ED Fig. 3 | Multi-scale attenuation (province → prefecture → county) |
 
 ## Author contributions
 
