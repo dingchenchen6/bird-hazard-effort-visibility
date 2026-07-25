@@ -219,6 +219,20 @@ continuous national risk surface (Fig. 3) in which the effort-conditioned climat
 slope turns positive only where observation is sufficient, rendering the moderation
 mechanism as geography.
 
+### Prediction accuracy depends on the task, not the algorithm
+
+We validated both model classes on the complete risk set under three regimes
+(Fig. 4c). For within-domain interpolation the machine-learning model is clearly
+better (area under the curve 0.774 versus 0.694; precision-recall 0.014 versus
+0.008). For temporal forecasting and for spatial extrapolation to held-out province
+blocks, however, the two classes converge (0.615–0.630 and 0.613–0.616): additional
+flexibility buys nothing once the prediction target leaves the observed domain.
+Calibration slopes tell the same story, falling from 0.91–0.97 under random folds to
+0.45–0.65 under temporal and spatial validation, so absolute probabilities — not only
+rankings — should be treated cautiously outside interpolation. The difficulty of
+forecasting new records is therefore a property of the data-generating process rather
+than of any algorithm.
+
 ### Two model classes bound the credible forecast horizon
 
 We projected forward with both a mechanistic hazard model and a gradient-boosted
@@ -241,6 +255,30 @@ forecast horizon**, which on this evidence reaches roughly 2050 under SSP2-4.5,
 where fewer than a fifth of units have left the observed domain, and degrades
 sharply thereafter. Rank agreement between the classes is moderate
 (Spearman ρ ≈ 0.3–0.6).
+
+### New records are displaced polewards, but the direction is taxon-structured
+
+If effort-moderated visibility tracks a real redistribution, new records should not
+fall randomly around historical ranges. Referencing 851 records (564 species) to
+each species' BirdLife historical range, they are strongly directionally biased
+(Fig. 5). Relative to range centroids the mean bearing is 55.7° (north-east;
+concentration *R* = 0.270, Rayleigh *P* < 0.001) with median displacement 1,273 km;
+relative to the nearest range edge the mean bearing is 21.1° (nearly due north;
+*R* = 0.355, *P* < 0.001) with median displacement 525 km. The edge-referenced
+distribution is both tighter and more sharply northward — the cleaner signature of
+range extension — with more than a fifth of all records falling in the single north
+sector. Ninety-five per cent of the displacement signal is therefore consistent with
+poleward redistribution, and 81 records (9.5 %) fall inside the historical range and
+represent within-range detection rather than extension.
+
+The aggregate pattern conceals systematic taxonomic structure. Passerines
+(*n* = 465) shift east-north-east (66.0°, *R* = 0.380, *P* < 0.001) and raptors
+north-east (36.5°, *P* = 0.021), whereas shorebirds trend north-west (323.5°,
+*P* = 0.040) and waterfowl are displaced *south-west* (196.6°, *P* = 0.022) and by
+the largest distances of any order (median 2,169 km from the centroid, versus
+1,190 km for passerines). A single "poleward" summary would therefore misdescribe
+almost half the orders: land birds expand along breeding-range margins while
+waterbird records accumulate along flyways and toward wintering grounds.
 
 ## Discussion
 
@@ -302,6 +340,18 @@ fraction of units outside the training range, converts an unfalsifiable
 century-scale projection into a bounded near-term one. On this evidence, projections
 to mid-century under moderate emissions are supportable; projections to 2080,
 especially under high emissions and rapid monitoring growth, are not.
+
+The directional analysis supplies independent, effort-free corroboration. Nothing
+in the bearing of a record relative to its species' historical range depends on the
+hazard model, yet records fall north-east of range centroids and almost due north of
+range edges, with highly significant angular concentration. That the effort-moderated
+hazard framework and the geometry of the records point the same way strengthens the
+claim that new records carry a genuine redistribution signal rather than only an
+observation signal. The taxonomic structure adds mechanism: passerines and raptors
+behave as expected of breeding-range expansion, whereas waterfowl move south-west and
+farthest, consistent with flyway geometry and wintering-ground redistribution rather
+than poleward breeding expansion. Directional analyses that pool orders will average
+these opposing signals toward zero.
 
 For monitoring under climate change, raw projected hazard is a poor guide to where
 survey investment is most valuable. Projections concentrate future risk where
@@ -395,6 +445,18 @@ share of units whose covariates leave the training range. Maps use the official
 GS(2019)1822 basemap and render the national boundary and the South China Sea
 nine-dash line.
 
+### Directional and displacement analysis
+
+New-record coordinates were referenced to each species' BirdLife (Birds of the World
+2024) historical range polygon. For every record we computed the bearing and
+great-circle distance to the range centroid and to the nearest point on the range
+edge, retaining 851 records (564 species) with usable polygons. Bearings were binned
+into 16 compass sectors for display and summarised with circular statistics: the mean
+resultant direction, the concentration *R* and a Rayleigh test of angular uniformity.
+Records falling inside the historical range have an edge distance of zero and were
+retained and reported separately rather than discarded. Displacement distributions
+were compared across taxonomic orders with at least 25 records.
+
 ### Reproducibility
 
 Analyses used R (glmmTMB, xgboost, ranger, blockCV, terra, sf, arrow) with versions
@@ -475,8 +537,23 @@ The mechanistic model rises to 13-fold (SSP2-4.5) and 131-fold (SSP5-8.5) by 208
 the machine-learning model saturates near 2.4-fold. **b**, Percentage of provinces
 whose projected climate leaves the training range — 18 % by 2050 and 55 % by 2080
 under SSP2-4.5, 48 % and 91 % under SSP5-8.5 — explaining where and why the two
-classes diverge.
-*Source: `Fig_F_future_mech_vs_ml`.*
+classes diverge. **c**, Model accuracy on the complete risk set by validation regime:
+machine learning wins at interpolation (0.774 vs 0.694) but the classes converge for
+temporal forecasting (0.615–0.630) and spatial extrapolation (0.613–0.616).
+*Source: `Fig_F_future_mech_vs_ml`, `Fig_H_model_accuracy`; province projection maps
+in `Fig_G_future_maps_mech` and `Fig_G_future_maps_ml`.*
+
+**Fig. 5 | New records are displaced polewards, with taxon-specific directions.**
+**a**, Sixteen-sector wind roses of record bearing relative to the historical range
+centroid (mean 55.7°, *R* = 0.270) and the nearest range edge (mean 21.1°,
+*R* = 0.355); both Rayleigh *P* < 0.001, *n* = 851 records. **b**, Composite roses by
+taxonomic order: passerines east-north-east, raptors north-east, shorebirds
+north-west and waterfowl south-west. **c**, Polar bearing × distance view with mean
+vectors. **d**, Displacement distributions by order and cumulative distributions;
+median 1,273 km from the centroid and 525 km beyond the nearest edge, with 81 of 851
+records (9.5 %) inside the historical range.
+*Source: `Fig_I_windrose_overall`, `Fig_I_windrose_by_order`,
+`Fig_J_polar_bearing_distance`, `Fig_K_distance_distributions`.*
 
 ### Extended Data
 
@@ -493,6 +570,9 @@ classes diverge.
 | ED Fig. 1 | Endogeneity: lagged-effort interaction |
 | ED Fig. 2 | Predictive validation across interpolation, temporal and spatial regimes |
 | ED Fig. 3 | Multi-scale attenuation (province → prefecture → county) |
+| ED Table 9 | Model accuracy by validation regime, including folds (`table_H_model_accuracy*.csv`) |
+| ED Table 10 | Directional summary: mean bearings, concentration and Rayleigh tests (`table_I_directional_summary.csv`) |
+| ED Table 11 | Displacement distances overall and by order (`table_J_distance_summary.csv`) |
 
 ## Author contributions
 
